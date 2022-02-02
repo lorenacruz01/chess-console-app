@@ -8,8 +8,8 @@ namespace Board
     {
         public Position PiecePostion { get; set; }
         public Color PieceColor { get; protected set; }
-        public int NumberOfMoves { get; set; }
         public ChessBoard ChessBoard { get; set; }
+        public int NumberOfMoves { get; set; }
 
         protected Piece(Position piecePostion, Color pieceColor, ChessBoard chessBoard)
         {

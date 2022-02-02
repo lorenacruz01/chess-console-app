@@ -9,7 +9,7 @@ namespace chess_console_app
         {
             //testing board
             ChessBoard board = new ChessBoard(8, 8);
-
+            Print.Board(board);
         }
     }
 }
