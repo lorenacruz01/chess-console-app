@@ -11,14 +11,15 @@ namespace Board
         public ChessBoard ChessBoard { get; set; }
         public int NumberOfMoves { get; set; }
 
-        protected Piece(Position piecePostion, Color pieceColor, ChessBoard chessBoard)
+        public abstract bool[,] AllowedMoves();
+
+        protected Piece(Color pieceColor, ChessBoard chessBoard)
         {
-            PiecePostion = piecePostion;
+            PiecePostion = null;
             PieceColor = pieceColor;
             ChessBoard = chessBoard;
             NumberOfMoves = 0;
         }
 
-        public abstract bool[,] AllowedMoves();
     }
 }

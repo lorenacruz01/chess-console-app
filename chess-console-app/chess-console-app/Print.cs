@@ -7,7 +7,7 @@ namespace chess_console_app
 {
     class Print
     {
-        static string letter = "a,b,c,d,e,f,g,h";
+        protected static string letter = "a,b,c,d,e,f,g,h";
         public static void Board(ChessBoard chessBoard)
         {
             for(int i = 0; i < chessBoard.Lines; i++)
