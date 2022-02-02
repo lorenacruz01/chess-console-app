@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Board
 {
-    enum Color
+    interface IPiece
     {
-        White,
-        Black
+        bool[,] AllowedMoves();
     }
 }
