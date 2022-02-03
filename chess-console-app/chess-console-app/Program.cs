@@ -8,9 +8,17 @@ namespace chess_console_app
     {
         static void Main(string[] args)
         {
-            
-                Position position = new Position('c',7) ;
-                Console.WriteLine(position);
+
+            try
+            {
+                ChessBoard board = new ChessBoard(8, 8);
+                board.PlaceSinglePiece(new King(Color.Black, board), new Position('a', 1));
+                board.PlaceSinglePiece(new King(Color.White, board), new Position('a', 8));
+                Print.Board(board);
+            } catch(BoardException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             
             
         }
