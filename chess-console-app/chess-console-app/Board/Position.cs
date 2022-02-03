@@ -1,14 +1,25 @@
-﻿namespace Board
+﻿using chess_console_app;
+namespace Board
 {
     class Position
     {
         public int Line { get; set; }
         public int Column { get; set; }
 
-        public Position(int line, int column)
+        public Position(char columnLetter, int line)
         {
-            Line = line;
-            Column = column;
+            
+            int convertedColumn = -1;
+            char[] letters = Print.ColumnLetters.ToCharArray();
+            for (int i = 0; i < letters.Length; i++)
+            {
+                if (letters[i] == columnLetter)
+                {
+                    convertedColumn = i;
+                }
+            }
+            Line = Print.LineConstant - line;
+            Column = convertedColumn;
         }
 
         public override string ToString()
