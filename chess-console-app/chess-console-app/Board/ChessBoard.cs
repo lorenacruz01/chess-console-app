@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using chess_console_app;
 
 namespace Board
 {
     class ChessBoard
     {
-        public int Lines { get; set; }
-        public int Columns { get; set; }
+        public int Lines = Print.Constant;
+        public int Columns = Print.Constant;
         private Piece[,] Pieces { get; set; }
 
-        public ChessBoard(int lines, int columns)
+        public ChessBoard()
         {
-            Lines = lines;
-            Columns = columns;
             Pieces = new Piece[Lines, Columns];
         }
 
@@ -42,12 +41,26 @@ namespace Board
 
         }
        
-        public void PlaceSinglePiece(Piece p, Position pos)
+        public void PlaceSinglePiece(Piece p, Position position)
         {
-            PositionIsValid(pos);
-            Pieces[pos.Line, pos.Column] = p;
-            p.PiecePostion = pos;
+            PositionIsValid(position);
+            Pieces[position.Line, position.Column] = p;
+            p.PiecePostion = position;
 
+        }
+
+        public Piece RemoveSinglePiece(Position position)
+        {
+            if(SinglePiece(position) == null)
+            {
+                return null;
+            } else
+            {
+                Piece pieceToBeRemoved = SinglePiece(position);
+                pieceToBeRemoved.PiecePostion = null;
+                Pieces[position.Line, position.Column] = null;
+                return pieceToBeRemoved;
+            }
         }
 
 

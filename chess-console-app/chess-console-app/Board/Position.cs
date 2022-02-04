@@ -18,7 +18,7 @@ namespace Board
                     convertedColumn = i;
                 }
             }
-            Line = Print.LineConstant - line;
+            Line = Print.Constant - line;
             Column = convertedColumn;
         }
 

@@ -8,12 +8,12 @@ namespace chess_console_app
     class Print
     {
         public static string ColumnLetters = "abcdefgh";
-        public static int LineConstant = 8;
+        public static int Constant = 8;
         public static void Board(ChessBoard chessBoard)
         {
             for(int i = 0; i < chessBoard.Lines; i++)
             {
-                Console.Write(LineConstant - i + " ");
+                Console.Write(Constant - i + " ");
                 for(int j = 0; j < chessBoard.Columns; j++)
                 {
                     if(chessBoard.SinglePiece(i, j) != null)

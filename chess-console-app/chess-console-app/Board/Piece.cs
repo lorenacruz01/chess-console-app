@@ -21,5 +21,10 @@ namespace Board
             NumberOfMoves = 0;
         }
 
+        public void RegisterMove()
+        {
+            NumberOfMoves++;
+        }
+
     }
 }

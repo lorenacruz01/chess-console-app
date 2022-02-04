@@ -6,15 +6,32 @@ namespace chess_console_app
 {
     class Program
     {
+        static Position ReadInformation()
+        {
+            string typedPosition = Console.ReadLine();
+            char column = typedPosition[0];
+            int line = int.Parse(typedPosition[1].ToString());
+            Position position = new Position(column, line);
+            return position;
+        }
         static void Main(string[] args)
         {
 
             try
             {
-                ChessBoard board = new ChessBoard(8, 8);
-                board.PlaceSinglePiece(new King(Color.Black, board), new Position('a', 1));
-                board.PlaceSinglePiece(new King(Color.White, board), new Position('a', 8));
-                Print.Board(board);
+                Match match = new Match();
+                while (!match.Finished)
+                {
+                    Console.Clear();
+                    Print.Board(match.ChessBoard);
+                    Console.Write("From: ");
+                    Position origin = ReadInformation();
+                    Console.Write("To: ");
+                    Position destination = ReadInformation();
+                    match.MovePiece(origin, destination);
+                    Print.Board(match.ChessBoard);
+                }
+
             } catch(BoardException ex)
             {
                 Console.WriteLine(ex.Message);
