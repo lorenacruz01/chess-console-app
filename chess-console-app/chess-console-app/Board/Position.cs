@@ -6,6 +6,10 @@ namespace Board
         public int Line { get; set; }
         public int Column { get; set; }
 
+        public Position()
+        {
+
+        }
         public Position(char columnLetter, int line)
         {
             
@@ -20,6 +24,12 @@ namespace Board
             }
             Line = Print.Constant - line;
             Column = convertedColumn;
+        }
+
+        public void DefinePosition(int line, int column)
+        {
+            Line = line;
+            Column = column;
         }
 
         public override string ToString()

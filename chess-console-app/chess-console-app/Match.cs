@@ -22,6 +22,7 @@ namespace chess_console_app
         {
             ChessBoard.PlaceSinglePiece(new King(Color.Black, ChessBoard), new Position('a', 1));
             ChessBoard.PlaceSinglePiece(new King(Color.White, ChessBoard), new Position('a', 8));
+            ChessBoard.PlaceSinglePiece(new Tower(Color.White, ChessBoard), new Position('a', 6));
         }
 
         public void MovePiece(Position origin, Position destination)

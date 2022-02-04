@@ -19,13 +19,21 @@ namespace chess_console_app
 
             try
             {
+              
                 Match match = new Match();
                 while (!match.Finished)
                 {
                     Console.Clear();
                     Print.Board(match.ChessBoard);
+                    Console.WriteLine();
                     Console.Write("From: ");
                     Position origin = ReadInformation();
+
+                    bool[,] allowedMoves = match.ChessBoard.SinglePiece(origin).AllowedMoves();
+                    Console.Clear();
+                    Print.Board(match.ChessBoard, allowedMoves);
+
+                    Console.WriteLine();
                     Console.Write("To: ");
                     Position destination = ReadInformation();
                     match.MovePiece(origin, destination);

@@ -27,14 +27,24 @@ namespace Board
             Piece p = Pieces[pos.Line, pos.Column];
             return p;
         }
-
-        public void PositionIsValid(Position pos)
+        public bool PositionInsideBoardLimits(Position position)
         {
-            if(pos.Line < 0 || pos.Line >= Lines || pos.Column < 0 || pos.Column >= Columns)
+            if (position.Line >= 0 && position.Line < Lines && position.Column >= 0 && position.Column < Columns)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+            
+        }
+        public void PositionIsValid(Position position)
+        {
+            if(!PositionInsideBoardLimits(position))
             {
                 throw new BoardException("Invalid Position");
             }
-            if (SinglePiece(pos) != null)
+            if (SinglePiece(position) != null)
             { 
                 throw new BoardException("Another piece is already placed in this position!");
             }
@@ -45,8 +55,8 @@ namespace Board
         {
             PositionIsValid(position);
             Pieces[position.Line, position.Column] = p;
-            p.PiecePostion = position;
-
+            p.PiecePosition = position;
+            
         }
 
         public Piece RemoveSinglePiece(Position position)
@@ -57,7 +67,7 @@ namespace Board
             } else
             {
                 Piece pieceToBeRemoved = SinglePiece(position);
-                pieceToBeRemoved.PiecePostion = null;
+                pieceToBeRemoved.PiecePosition = null;
                 Pieces[position.Line, position.Column] = null;
                 return pieceToBeRemoved;
             }
