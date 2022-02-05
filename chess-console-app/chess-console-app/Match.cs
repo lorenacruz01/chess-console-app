@@ -15,6 +15,7 @@ namespace chess_console_app
 
         private HashSet<Piece> Pieces { get; set; }
         private HashSet<Piece> CapturedPieces { get; set; }
+        public bool Check { get; private set; }
 
         public Match()
         {
@@ -23,6 +24,7 @@ namespace chess_console_app
             ChessBoard = new ChessBoard();
             Pieces = new HashSet<Piece>();
             CapturedPieces = new HashSet<Piece>();
+            Check = false;
             PlaceAllPieces();
         }
         private void PlacePiece(Piece piece, char column, int line)
@@ -32,10 +34,20 @@ namespace chess_console_app
         }
         private void PlaceAllPieces()
         {
-            PlacePiece(new King(Color.Black, ChessBoard), 'a', 1);
-            PlacePiece(new King(Color.Black, ChessBoard), 'a', 8);
-            PlacePiece(new King(Color.White, ChessBoard), 'b', 7);
-            PlacePiece(new King(Color.White, ChessBoard), 'b', 6);
+            PlacePiece(new Tower(Color.Black, ChessBoard), 'c', 8);
+            PlacePiece(new Tower(Color.Black, ChessBoard), 'c', 7);
+            PlacePiece(new King(Color.Black, ChessBoard), 'd', 8);
+            PlacePiece(new Tower(Color.Black, ChessBoard), 'd', 7);
+            PlacePiece(new Tower(Color.Black, ChessBoard), 'e', 8);
+            PlacePiece(new Tower(Color.Black, ChessBoard), 'e', 7);
+
+            PlacePiece(new Tower(Color.White, ChessBoard), 'c', 1);
+            PlacePiece(new Tower(Color.White, ChessBoard), 'c', 2);
+            PlacePiece(new Tower(Color.White, ChessBoard), 'd', 2);
+            PlacePiece(new King(Color.White, ChessBoard), 'd', 1);
+            PlacePiece(new Tower(Color.White, ChessBoard), 'e', 2);
+            PlacePiece(new Tower(Color.White, ChessBoard), 'e', 1);
+           
 
         }
 
@@ -63,7 +75,7 @@ namespace chess_console_app
                 throw new BoardException("The piece you chose is not allowed to move to this position!");
             }
         }
-        public void MovePiece(Position origin, Position destination)
+        public Piece MovePiece(Position origin, Position destination)
         {
             Piece pieceToBeMoved = ChessBoard.RemoveSinglePiece(origin);
             pieceToBeMoved.RegisterMove();
@@ -74,7 +86,8 @@ namespace chess_console_app
                 CapturedPieces.Add(capturedPiece);
             }
             ChessBoard.PlaceSinglePiece(pieceToBeMoved, destination);
-            
+
+            return capturedPiece;
         }
 
         private void SwitchPlayer()
@@ -88,12 +101,42 @@ namespace chess_console_app
             }
         }
 
+        public void UndoMove(Piece piece, Position origin, Position destination)
+        {
+            Piece pieceToOrigin = ChessBoard.RemoveSinglePiece(destination);
+            pieceToOrigin.NumberOfMoves--;
+            if(piece != null)
+            {
+                ChessBoard.PlaceSinglePiece(piece, destination);
+                CapturedPieces.Remove(piece);
+            }
+            ChessBoard.PlaceSinglePiece(pieceToOrigin, origin);
+
+        }
+
         public void MakeAMove(Position origin, Position destination)
         {
-            MovePiece(origin, destination);
+            Piece capturedPiece = MovePiece(origin, destination);
+            
+            if (IsCheck(CurrentPlayer))
+            {           
+                UndoMove(capturedPiece, origin, destination);
+                throw new BoardException("You cannot make a move that places your King in check!");
+            }
+
+            if (IsCheck(Opponent(CurrentPlayer)))
+            {
+                Check = true;
+            } else
+            {
+                Check = false;
+            }
+
             Turn++;
             SwitchPlayer();
         }
+
+
 
         public HashSet<Piece> PlayerCapturedPieces(Color player)
         {
@@ -108,6 +151,45 @@ namespace chess_console_app
             HashSet<Piece> availablePieces = new HashSet<Piece>(Pieces.Where(x => x.PieceColor == player));
             availablePieces.ExceptWith(PlayerCapturedPieces(player));
             return availablePieces;
+        }
+
+        private Piece King(Color color)
+        {
+            foreach (Piece piece in PlayerAvailablePieces(color))
+            {
+                if(piece is King)
+                {
+                    return piece;
+                }
+            }
+            return null;
+        }
+
+        private Color Opponent(Color player)
+        {
+            if (player == Color.Black)
+            {
+                return Color.White;
+            }
+            else
+            {
+                return Color.Black;
+            }
+        }
+
+        private bool IsCheck(Color player)
+        {
+            bool[,] allThreats; 
+            foreach(Piece piece in PlayerAvailablePieces(Opponent(player)))
+            {
+                Piece king = King(player);
+                allThreats = piece.Moves();
+                if(allThreats[king.PiecePosition.Line, king.PiecePosition.Column])
+                {
+                    return true;
+                }  
+            }
+            return false;
         }
 
 

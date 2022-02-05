@@ -81,9 +81,9 @@ namespace chess_console_app
             Console.Write("[ ");
             foreach(Piece piece in whiteCapturedPieces)
             {
-                Console.WriteLine(piece + " ");
+                Console.Write(piece + " ");
             }
-            Console.Write("] ");
+            Console.WriteLine("] ");
 
             Console.WriteLine();
             Console.Write("Black: ");
@@ -100,8 +100,6 @@ namespace chess_console_app
             Console.WriteLine("-------------------------");
         }
 
-
-
         public static void Match(Match match)
         {
             Board(match.ChessBoard);
@@ -109,6 +107,13 @@ namespace chess_console_app
             PrintCapturedPieces(match);
             Console.WriteLine();
             Console.WriteLine("Turn: " + match.Turn + ", Player: " + match.CurrentPlayer);
+            if(match.Check == true)
+            {
+                ConsoleColor defaultColor = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("THE " + match.CurrentPlayer.ToString().ToUpper() + " KING IS IN CHECK!");
+                Console.ForegroundColor = defaultColor;
+            }
         }
         
     }
