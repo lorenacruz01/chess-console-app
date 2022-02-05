@@ -9,6 +9,11 @@ namespace chess_console_app
         static Position ReadInformation()
         {
             string typedPosition = Console.ReadLine();
+            if(typedPosition.Length > 2)
+            {
+                throw new BoardException("You must type only two characters! The first one is a letter (a-g) " +
+                    "that refers to the column and the second refers to the line number (1-7). Ex: a1, b2, c7 etc.");
+            }
             char column = typedPosition[0];
             int line = int.Parse(typedPosition[1].ToString());
             Position position = new Position(column, line);

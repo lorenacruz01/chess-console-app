@@ -1,9 +1,4 @@
 C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\Debug\netcoreapp3.1\chess-console-app.exe
-C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\Debug\netcoreapp3.1\chess-console-app.deps.json
-C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\Debug\netcoreapp3.1\chess-console-app.runtimeconfig.json
-C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\Debug\netcoreapp3.1\chess-console-app.runtimeconfig.dev.json
-C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\Debug\netcoreapp3.1\chess-console-app.dll
-C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\Debug\netcoreapp3.1\chess-console-app.pdb
 C:\workspace\chess-console-app\chess-console-app\chess-console-app\obj\Debug\netcoreapp3.1\chess-console-app.csproj.AssemblyReference.cache
 C:\workspace\chess-console-app\chess-console-app\chess-console-app\obj\Debug\netcoreapp3.1\chess-console-app.GeneratedMSBuildEditorConfig.editorconfig
 C:\workspace\chess-console-app\chess-console-app\chess-console-app\obj\Debug\netcoreapp3.1\chess-console-app.AssemblyInfoInputs.cache
@@ -11,4 +6,9 @@ C:\workspace\chess-console-app\chess-console-app\chess-console-app\obj\Debug\net
 C:\workspace\chess-console-app\chess-console-app\chess-console-app\obj\Debug\netcoreapp3.1\chess-console-app.csproj.CoreCompileInputs.cache
 C:\workspace\chess-console-app\chess-console-app\chess-console-app\obj\Debug\netcoreapp3.1\chess-console-app.dll
 C:\workspace\chess-console-app\chess-console-app\chess-console-app\obj\Debug\netcoreapp3.1\chess-console-app.pdb
+C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\Debug\netcoreapp3.1\chess-console-app.deps.json
+C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\Debug\netcoreapp3.1\chess-console-app.runtimeconfig.json
+C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\Debug\netcoreapp3.1\chess-console-app.runtimeconfig.dev.json
+C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\Debug\netcoreapp3.1\chess-console-app.dll
+C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\Debug\netcoreapp3.1\chess-console-app.pdb
 C:\workspace\chess-console-app\chess-console-app\chess-console-app\obj\Debug\netcoreapp3.1\chess-console-app.genruntimeconfig.cache

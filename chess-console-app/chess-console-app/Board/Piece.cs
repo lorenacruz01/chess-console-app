@@ -57,7 +57,15 @@ namespace Board
 
         public bool AllowedToMove(Position position)
         {
-            bool result = Moves()[position.Line, position.Column];
+            bool result = false;
+            if (ChessBoard.PositionInsideBoardLimits(position) == true)
+            {
+                result = Moves()[position.Line, position.Column];
+            } else
+            {
+                throw new BoardException("Invalid Position");
+            }
+            
             return result;
         }
 
