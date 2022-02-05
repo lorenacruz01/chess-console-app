@@ -72,6 +72,44 @@ namespace chess_console_app
             }
             
         }
+
+        public static void PrintCapturedPieces(Match match)
+        {
+            Console.WriteLine("---All Captured Pieces---");
+            Console.Write("White: ");
+            HashSet<Piece> whiteCapturedPieces = match.PlayerCapturedPieces(Color.White);
+            Console.Write("[ ");
+            foreach(Piece piece in whiteCapturedPieces)
+            {
+                Console.WriteLine(piece + " ");
+            }
+            Console.Write("] ");
+
+            Console.WriteLine();
+            Console.Write("Black: ");
+            ConsoleColor defaultColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Blue;
+            HashSet<Piece> blackCapturedPieces = match.PlayerCapturedPieces(Color.Black);
+            Console.Write("[ ");
+            foreach (Piece piece in blackCapturedPieces)
+            {
+                Console.Write(piece + " ");
+            }
+            Console.WriteLine("] ");
+            Console.ForegroundColor = defaultColor;
+            Console.WriteLine("-------------------------");
+        }
+
+
+
+        public static void Match(Match match)
+        {
+            Board(match.ChessBoard);
+            Console.WriteLine();
+            PrintCapturedPieces(match);
+            Console.WriteLine();
+            Console.WriteLine("Turn: " + match.Turn + ", Player: " + match.CurrentPlayer);
+        }
         
     }
 }

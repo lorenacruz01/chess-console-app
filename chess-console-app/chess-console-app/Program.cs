@@ -29,9 +29,9 @@ namespace chess_console_app
                 try
                 {
                     Console.Clear();
-                    Print.Board(match.ChessBoard);
-                    Console.WriteLine();
-                    Console.WriteLine("Turn: " + match.Turn + ", Player: " + match.CurrentPlayer);
+                    //Print.Board(match.ChessBoard);
+                    Print.Match(match);
+                    
                     Console.WriteLine();
                     Console.Write("From: ");
                     Position origin = ReadInformation();

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Board;
 using Pieces;
 
@@ -11,20 +13,29 @@ namespace chess_console_app
         public Color CurrentPlayer { get; private set; }
         public ChessBoard ChessBoard { get; private set; }
 
+        private HashSet<Piece> Pieces { get; set; }
+        private HashSet<Piece> CapturedPieces { get; set; }
+
         public Match()
         {
             Turn = 1;
             CurrentPlayer = Color.White;
             ChessBoard = new ChessBoard();
+            Pieces = new HashSet<Piece>();
+            CapturedPieces = new HashSet<Piece>();
             PlaceAllPieces();
+        }
+        private void PlacePiece(Piece piece, char column, int line)
+        {
+            Pieces.Add(piece);
+            ChessBoard.PlaceSinglePiece(piece, new Position(column, line));
         }
         private void PlaceAllPieces()
         {
-            ChessBoard.PlaceSinglePiece(new King(Color.Black, ChessBoard), new Position('a', 1));
-            ChessBoard.PlaceSinglePiece(new King(Color.White, ChessBoard), new Position('a', 8));
-            ChessBoard.PlaceSinglePiece(new King(Color.White, ChessBoard), new Position('a', 7));
-            ChessBoard.PlaceSinglePiece(new King(Color.White, ChessBoard), new Position('b', 7));
-            ChessBoard.PlaceSinglePiece(new King(Color.White, ChessBoard), new Position('b', 8));
+            PlacePiece(new King(Color.Black, ChessBoard), 'a', 1);
+            PlacePiece(new King(Color.Black, ChessBoard), 'a', 8);
+            PlacePiece(new King(Color.White, ChessBoard), 'b', 7);
+            PlacePiece(new King(Color.White, ChessBoard), 'b', 6);
 
         }
 
@@ -56,9 +67,14 @@ namespace chess_console_app
         {
             Piece pieceToBeMoved = ChessBoard.RemoveSinglePiece(origin);
             pieceToBeMoved.RegisterMove();
-            ChessBoard.RemoveSinglePiece(destination);
-            ChessBoard.PlaceSinglePiece(pieceToBeMoved, destination);
 
+            Piece capturedPiece = ChessBoard.RemoveSinglePiece(destination);
+            if (capturedPiece != null)
+            {
+                CapturedPieces.Add(capturedPiece);
+            }
+            ChessBoard.PlaceSinglePiece(pieceToBeMoved, destination);
+            
         }
 
         private void SwitchPlayer()
@@ -79,6 +95,20 @@ namespace chess_console_app
             SwitchPlayer();
         }
 
+        public HashSet<Piece> PlayerCapturedPieces(Color player)
+        {
+             //capturedPieces = new HashSet<Piece>();
+            HashSet<Piece> capturedPieces = new HashSet<Piece>(CapturedPieces.Where(x => x.PieceColor == player));
+            return capturedPieces;
+        }
+
+        public HashSet<Piece> PlayerAvailablePieces(Color player)
+        {
+            //capturedPieces = new HashSet<Piece>();
+            HashSet<Piece> availablePieces = new HashSet<Piece>(Pieces.Where(x => x.PieceColor == player));
+            availablePieces.ExceptWith(PlayerCapturedPieces(player));
+            return availablePieces;
+        }
 
 
     }
