@@ -1,5 +1,0 @@
-C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\chess-console-app.exe
-C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\chess-console-app.dll
-C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\chess-console-app.deps.json
-C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\chess-console-app.runtimeconfig.json
-C:\workspace\chess-console-app\chess-console-app\chess-console-app\bin\chess-console-app.pdb
