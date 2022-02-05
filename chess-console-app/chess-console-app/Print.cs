@@ -107,13 +107,26 @@ namespace chess_console_app
             PrintCapturedPieces(match);
             Console.WriteLine();
             Console.WriteLine("Turn: " + match.Turn + ", Player: " + match.CurrentPlayer);
-            if(match.Check == true)
+            if(match.Finished == false)
+            {
+                if (match.Check == true)
+                {
+                    ConsoleColor defaultColor = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("THE " + match.CurrentPlayer.ToString().ToUpper() + " KING IS IN CHECK!");
+                    Console.ForegroundColor = defaultColor;
+                }
+            } else
             {
                 ConsoleColor defaultColor = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("THE " + match.CurrentPlayer.ToString().ToUpper() + " KING IS IN CHECK!");
+                Console.WriteLine("CHECKMATE! THE MATCH IS OVER!");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Winner: ");
                 Console.ForegroundColor = defaultColor;
+                Console.WriteLine(match.CurrentPlayer);
             }
+            
         }
         
     }

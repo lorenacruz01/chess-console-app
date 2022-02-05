@@ -34,20 +34,12 @@ namespace chess_console_app
         }
         private void PlaceAllPieces()
         {
-            PlacePiece(new Tower(Color.Black, ChessBoard), 'c', 8);
-            PlacePiece(new Tower(Color.Black, ChessBoard), 'c', 7);
-            PlacePiece(new King(Color.Black, ChessBoard), 'd', 8);
-            PlacePiece(new Tower(Color.Black, ChessBoard), 'd', 7);
-            PlacePiece(new Tower(Color.Black, ChessBoard), 'e', 8);
-            PlacePiece(new Tower(Color.Black, ChessBoard), 'e', 7);
-
             PlacePiece(new Tower(Color.White, ChessBoard), 'c', 1);
-            PlacePiece(new Tower(Color.White, ChessBoard), 'c', 2);
-            PlacePiece(new Tower(Color.White, ChessBoard), 'd', 2);
             PlacePiece(new King(Color.White, ChessBoard), 'd', 1);
-            PlacePiece(new Tower(Color.White, ChessBoard), 'e', 2);
-            PlacePiece(new Tower(Color.White, ChessBoard), 'e', 1);
-           
+            PlacePiece(new Tower(Color.White, ChessBoard), 'h', 7);
+
+            PlacePiece(new Tower(Color.Black, ChessBoard), 'b', 8);
+            PlacePiece(new King(Color.Black, ChessBoard), 'a', 8);
 
         }
 
@@ -132,8 +124,18 @@ namespace chess_console_app
                 Check = false;
             }
 
-            Turn++;
-            SwitchPlayer();
+            if (IsCheckmate(Opponent(CurrentPlayer)))
+            {
+                Finished = true;
+            }
+            else
+            {
+                Finished = false;
+                Turn++;
+                SwitchPlayer();
+            }
+
+            
         }
 
 
@@ -192,6 +194,40 @@ namespace chess_console_app
             return false;
         }
 
+        private bool IsCheckmate(Color player)
+        {
+            if (IsCheck(player) == false)
+            {
+                return false;
+            } else
+            {
+                bool[,] moves;
+                foreach (Piece piece in PlayerAvailablePieces(player))
+                {
 
+                    moves = piece.Moves();
+                    for (int i = 0; i < ChessBoard.Lines; i++)
+                    {
+                        for (int j = 0; j < ChessBoard.Columns; j++)
+                        {
+                            if (moves[i, j] == true)
+                            {
+                                Position fromPosition = piece.PiecePosition;
+                                Position toPosition = new Position(i, j);
+                                Piece capturedPiece = MovePiece(fromPosition, toPosition);
+                                bool isCheck = IsCheck(player);
+                                UndoMove(capturedPiece, fromPosition, toPosition);
+                                if (isCheck == false)
+                                {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+            
+        }
     }
 }

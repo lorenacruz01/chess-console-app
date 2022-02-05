@@ -26,6 +26,12 @@ namespace Board
             Column = convertedColumn;
         }
 
+        public Position(int line, int column)
+        {
+            Line = line;
+            Column = column;
+        }
+
         public void DefinePosition(int line, int column)
         {
             Line = line;
