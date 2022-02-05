@@ -34,12 +34,39 @@ namespace chess_console_app
         }
         private void PlaceAllPieces()
         {
-            PlacePiece(new Tower(Color.White, ChessBoard), 'c', 1);
-            PlacePiece(new King(Color.White, ChessBoard), 'd', 1);
-            PlacePiece(new Tower(Color.White, ChessBoard), 'h', 7);
+            PlacePiece(new Rook(Color.White, ChessBoard), 'a', 1);
+            PlacePiece(new Knight(Color.White, ChessBoard), 'b', 1);
+            PlacePiece(new Bishop(Color.White, ChessBoard), 'c', 1);
+            PlacePiece(new Queen(Color.White, ChessBoard), 'd', 1);
+            PlacePiece(new King(Color.White, ChessBoard), 'e', 1);
+            PlacePiece(new Bishop(Color.White, ChessBoard), 'f', 1);
+            PlacePiece(new Knight(Color.White, ChessBoard), 'g', 1);
+            PlacePiece(new Rook(Color.White, ChessBoard), 'h', 1);
+            PlacePiece(new Pawn(Color.White, ChessBoard), 'a', 2);
+            PlacePiece(new Pawn(Color.White, ChessBoard), 'b', 2);
+            PlacePiece(new Pawn(Color.White, ChessBoard), 'c', 2);
+            PlacePiece(new Pawn(Color.White, ChessBoard), 'd', 2);
+            PlacePiece(new Pawn(Color.White, ChessBoard), 'e', 2);
+            PlacePiece(new Pawn(Color.White, ChessBoard), 'f', 2);
+            PlacePiece(new Pawn(Color.White, ChessBoard), 'g', 2);
+            PlacePiece(new Pawn(Color.White, ChessBoard), 'h', 2);
 
-            PlacePiece(new Tower(Color.Black, ChessBoard), 'b', 8);
-            PlacePiece(new King(Color.Black, ChessBoard), 'a', 8);
+            PlacePiece(new Pawn(Color.Black, ChessBoard), 'a', 7);
+            PlacePiece(new Pawn(Color.Black, ChessBoard), 'b', 7);
+            PlacePiece(new Pawn(Color.Black, ChessBoard), 'c', 7);
+            PlacePiece(new Pawn(Color.Black, ChessBoard), 'd', 7);
+            PlacePiece(new Pawn(Color.Black, ChessBoard), 'e', 7);
+            PlacePiece(new Pawn(Color.Black, ChessBoard), 'f', 7);
+            PlacePiece(new Pawn(Color.Black, ChessBoard), 'g', 7);
+            PlacePiece(new Pawn(Color.Black, ChessBoard), 'h', 7);
+            PlacePiece(new Rook(Color.Black, ChessBoard), 'a', 8);
+            PlacePiece(new Knight(Color.Black, ChessBoard), 'b', 8);
+            PlacePiece(new Bishop(Color.Black, ChessBoard), 'c', 8);
+            PlacePiece(new Queen(Color.Black, ChessBoard), 'd', 8);
+            PlacePiece(new King(Color.Black, ChessBoard), 'e', 8);
+            PlacePiece(new Bishop(Color.Black, ChessBoard), 'f', 8);
+            PlacePiece(new Knight(Color.Black, ChessBoard), 'g', 8);
+            PlacePiece(new Rook(Color.Black, ChessBoard), 'h', 8);
 
         }
 
@@ -132,6 +159,7 @@ namespace chess_console_app
             {
                 Finished = false;
                 Turn++;
+
                 SwitchPlayer();
             }
 

@@ -2,18 +2,18 @@
 
 namespace Pieces
 {
-    class Rook : Piece
+    class Bishop : Piece
     {
-        public Rook(Color pieceColor, ChessBoard chessBoard) : base(pieceColor, chessBoard)
+        public Bishop(Color pieceColor, ChessBoard chessBoard) : base(pieceColor, chessBoard)
         {
         }
-        
+
         public override bool[,] Moves()
         {
             bool[,] moves = new bool[ChessBoard.Lines, ChessBoard.Columns];
             Position position = new Position();
 
-            position.DefinePosition(PiecePosition.Line - 1, PiecePosition.Column);
+            position.DefinePosition(PiecePosition.Line - 1, PiecePosition.Column - 1);
             while (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
                 moves[position.Line, position.Column] = true;
@@ -21,10 +21,10 @@ namespace Pieces
                 {
                     break;
                 }
-                position.Line--;
+                position.DefinePosition(position.Line - 1, position.Column - 1);
             }
 
-            position.DefinePosition(PiecePosition.Line + 1, PiecePosition.Column);
+            position.DefinePosition(PiecePosition.Line + 1, PiecePosition.Column + 1);
             while (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
                 moves[position.Line, position.Column] = true;
@@ -32,10 +32,10 @@ namespace Pieces
                 {
                     break;
                 }
-                position.Line++;
+                position.DefinePosition(position.Line + 1, position.Column + 1);
             }
 
-            position.DefinePosition(PiecePosition.Line, PiecePosition.Column - 1);
+            position.DefinePosition(PiecePosition.Line + 1, PiecePosition.Column - 1);
             while (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
                 moves[position.Line, position.Column] = true;
@@ -43,10 +43,10 @@ namespace Pieces
                 {
                     break;
                 }
-                position.Column--;
+                position.DefinePosition(position.Line + 1, position.Column - 1);
             }
 
-            position.DefinePosition(PiecePosition.Line, PiecePosition.Column + 1);
+            position.DefinePosition(PiecePosition.Line - 1, PiecePosition.Column + 1);
             while (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
                 moves[position.Line, position.Column] = true;
@@ -54,14 +54,15 @@ namespace Pieces
                 {
                     break;
                 }
-                position.Column++;
+                position.DefinePosition(position.Line - 1, position.Column + 1);
             }
+
             return moves;
         }
 
         public override string ToString()
         {
-            return "R";
+            return "B";
         }
     }
 }
