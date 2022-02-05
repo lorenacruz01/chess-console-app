@@ -24,7 +24,7 @@ namespace chess_console_app
             Console.WriteLine("  a b c d e f g h");
         }
 
-        public static void Board(ChessBoard chessBoard, bool[,] allowedMoves)
+        public static void Board(ChessBoard chessBoard, bool[,] moves)
         {
             ConsoleColor defaultColor = Console.BackgroundColor;
             ConsoleColor newColor = ConsoleColor.DarkGray;
@@ -34,7 +34,7 @@ namespace chess_console_app
                 Console.Write(Constant - i + " ");
                 for (int j = 0; j < chessBoard.Columns; j++)
                 {
-                    if(allowedMoves[i, j])
+                    if(moves[i, j])
                     {
                         Console.BackgroundColor = newColor;
                     } else

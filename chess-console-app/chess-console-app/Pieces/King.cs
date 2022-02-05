@@ -9,60 +9,60 @@ namespace Pieces
 
         }
 
-        public override bool[,] AllowedMoves()
+        public override bool[,] Moves()
         {
-            bool[,] allowedMoves = new bool[ChessBoard.Lines, ChessBoard.Columns];
+            bool[,] moves = new bool[ChessBoard.Lines, ChessBoard.Columns];
             Position position = new Position();
 
             position.DefinePosition(PiecePosition.Line - 1, PiecePosition.Column);
             if (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
-                allowedMoves[position.Line, position.Column] = true;
+                moves[position.Line, position.Column] = true;
             }
 
             position.DefinePosition(PiecePosition.Line + 1, PiecePosition.Column);
             if (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
-                allowedMoves[position.Line, position.Column] = true;
+                moves[position.Line, position.Column] = true;
             }
 
             position.DefinePosition(PiecePosition.Line, PiecePosition.Column - 1);
             if (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
-                allowedMoves[position.Line, position.Column] = true;
+                moves[position.Line, position.Column] = true;
             }
 
             position.DefinePosition(PiecePosition.Line, PiecePosition.Column + 1);
             if (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
-                allowedMoves[position.Line, position.Column] = true;
+                moves[position.Line, position.Column] = true;
             }
 
 
             position.DefinePosition(PiecePosition.Line + 1, PiecePosition.Column + 1);
             if (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
-                allowedMoves[position.Line, position.Column] = true;
+                moves[position.Line, position.Column] = true;
             }
 
             position.DefinePosition(PiecePosition.Line - 1, PiecePosition.Column - 1);
             if (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
-                allowedMoves[position.Line, position.Column] = true;
+                moves[position.Line, position.Column] = true;
             }
 
             position.DefinePosition(PiecePosition.Line + 1, PiecePosition.Column - 1);
             if (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
-                allowedMoves[position.Line, position.Column] = true;
+                moves[position.Line, position.Column] = true;
             }
 
             position.DefinePosition(PiecePosition.Line - 1, PiecePosition.Column + 1);
             if (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
-                allowedMoves[position.Line, position.Column] = true;
+                moves[position.Line, position.Column] = true;
             }
-            return allowedMoves;
+            return moves;
         }
 
         public override string ToString()

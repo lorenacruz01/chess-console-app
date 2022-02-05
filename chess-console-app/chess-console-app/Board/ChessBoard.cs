@@ -22,9 +22,13 @@ namespace Board
             return p;
         }
 
-        public Piece SinglePiece(Position pos)
+        public Piece SinglePiece(Position position)
         {
-            Piece p = Pieces[pos.Line, pos.Column];
+            if (!PositionInsideBoardLimits(position))
+            {
+                throw new BoardException("Invalid Position!");
+            }
+            Piece p = Pieces[position.Line, position.Column];
             return p;
         }
         public bool PositionInsideBoardLimits(Position position)

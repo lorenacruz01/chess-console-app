@@ -13,15 +13,15 @@ namespace Pieces
             return "T";
         }
 
-        public override bool[,] AllowedMoves()
+        public override bool[,] Moves()
         {
-            bool[,] allowedMoves = new bool[ChessBoard.Lines, ChessBoard.Columns];
+            bool[,] moves = new bool[ChessBoard.Lines, ChessBoard.Columns];
             Position position = new Position();
 
             position.DefinePosition(PiecePosition.Line - 1, PiecePosition.Column);
             while (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
-                allowedMoves[position.Line, position.Column] = true;
+                moves[position.Line, position.Column] = true;
                 if (ChessBoard.SinglePiece(position) != null && ChessBoard.SinglePiece(position).PieceColor != PieceColor)
                 {
                     break;
@@ -32,7 +32,7 @@ namespace Pieces
             position.DefinePosition(PiecePosition.Line + 1, PiecePosition.Column);
             while (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
-                allowedMoves[position.Line, position.Column] = true;
+                moves[position.Line, position.Column] = true;
                 if (ChessBoard.SinglePiece(position) != null && ChessBoard.SinglePiece(position).PieceColor != PieceColor)
                 {
                     break;
@@ -43,7 +43,7 @@ namespace Pieces
             position.DefinePosition(PiecePosition.Line, PiecePosition.Column - 1);
             while (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
-                allowedMoves[position.Line, position.Column] = true;
+                moves[position.Line, position.Column] = true;
                 if (ChessBoard.SinglePiece(position) != null && ChessBoard.SinglePiece(position).PieceColor != PieceColor)
                 {
                     break;
@@ -54,14 +54,14 @@ namespace Pieces
             position.DefinePosition(PiecePosition.Line, PiecePosition.Column + 1);
             while (ChessBoard.PositionInsideBoardLimits(position) && VerifyPosition(position))
             {
-                allowedMoves[position.Line, position.Column] = true;
+                moves[position.Line, position.Column] = true;
                 if (ChessBoard.SinglePiece(position) != null && ChessBoard.SinglePiece(position).PieceColor != PieceColor)
                 {
                     break;
                 }
                 position.Column++;
             }
-            return allowedMoves;
+            return moves;
         }
     }
 }

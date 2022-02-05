@@ -7,6 +7,6 @@ namespace Board
     interface IPiece
     {
         bool VerifyPosition(Position pos);
-        bool[,] AllowedMoves();
+        bool[,] Moves();
     }
 }

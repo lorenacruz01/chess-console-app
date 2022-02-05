@@ -17,35 +17,44 @@ namespace chess_console_app
         static void Main(string[] args)
         {
 
-            try
+
+            Match match = new Match();
+            while (!match.Finished)
             {
-              
-                Match match = new Match();
-                while (!match.Finished)
+                try
                 {
                     Console.Clear();
                     Print.Board(match.ChessBoard);
                     Console.WriteLine();
+                    Console.WriteLine("Turn: " + match.Turn + ", Player: " + match.CurrentPlayer);
+                    Console.WriteLine();
                     Console.Write("From: ");
                     Position origin = ReadInformation();
+                    match.ValidateOrigin(origin);
 
-                    bool[,] allowedMoves = match.ChessBoard.SinglePiece(origin).AllowedMoves();
+                    bool[,] moves = match.ChessBoard.SinglePiece(origin).Moves();
                     Console.Clear();
-                    Print.Board(match.ChessBoard, allowedMoves);
+                    Print.Board(match.ChessBoard, moves);
 
                     Console.WriteLine();
                     Console.Write("To: ");
                     Position destination = ReadInformation();
-                    match.MovePiece(origin, destination);
+                    match.ValidateDestination(origin, destination);
+                    match.MakeAMove(origin, destination);
                     Print.Board(match.ChessBoard);
                 }
+                catch (BoardException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Press enter to try again!");
+                    Console.ReadLine();
+                }
 
-            } catch(BoardException ex)
-            {
-                Console.WriteLine(ex.Message);
             }
-            
-            
+
+
+
+
         }
     }
 }

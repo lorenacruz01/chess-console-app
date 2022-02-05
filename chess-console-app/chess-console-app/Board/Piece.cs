@@ -24,7 +24,7 @@ namespace Board
             }
         }
 
-        public abstract bool[,] AllowedMoves();
+        public abstract bool[,] Moves();
         
         protected Piece(Color pieceColor, ChessBoard chessBoard)
         {
@@ -39,6 +39,27 @@ namespace Board
             NumberOfMoves++;
         }
 
-   
+        public bool AllowedMoves()
+        {
+            bool[,] allowedMoves = Moves();
+            for(int i = 0; i < ChessBoard.Lines; i++)
+            {
+                for (int j = 0; j < ChessBoard.Columns; j++)
+                {
+                    if(allowedMoves[i, j] == true)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool AllowedToMove(Position position)
+        {
+            bool result = Moves()[position.Line, position.Column];
+            return result;
+        }
+
     }
 }
